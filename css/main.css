@@ -18,34 +18,6 @@
   --btn-default-hover-color: var(--link-hover-color);
   --btn-default-hover-border-color: var(--link-hover-color);
 }
-@media (prefers-color-scheme: dark) {
-  :root {
-    --body-bg-color: #282828;
-    --content-bg-color: #333;
-    --card-bg-color: #555;
-    --text-color: #ccc;
-    --blockquote-color: #bbb;
-    --link-color: #ccc;
-    --link-hover-color: #eee;
-    --brand-color: #ddd;
-    --brand-hover-color: #ddd;
-    --table-row-odd-bg-color: #282828;
-    --table-row-hover-bg-color: #363636;
-    --menu-item-bg-color: #555;
-    --btn-default-bg: #222;
-    --btn-default-color: #ccc;
-    --btn-default-border-color: #555;
-    --btn-default-hover-bg: #666;
-    --btn-default-hover-color: #ccc;
-    --btn-default-hover-border-color: #666;
-  }
-  img {
-    opacity: 0.75;
-  }
-  img:hover {
-    opacity: 0.9;
-  }
-}
 html {
   line-height: 1.15; /* 1 */
   -webkit-text-size-adjust: 100%; /* 2 */
@@ -1189,11 +1161,6 @@ pre .javascript .function {
   position: fixed;
   top: 0;
 }
-@media (max-width: 991px) {
-  .sidebar {
-    display: none;
-  }
-}
 .sidebar-inner {
   color: #999;
   padding: 18px 10px;
@@ -1256,7 +1223,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #4d67cc;
+  background: #ab73dd;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -1375,7 +1342,6 @@ pre .javascript .function {
   .sidebar-toggle {
     left: 20px;
     opacity: 0.8;
-    display: none;
   }
 }
 .sidebar-toggle:hover .toggle-line {
@@ -1700,7 +1666,14 @@ pre .javascript .function {
   margin-top: 40px;
   text-align: center;
 }
-.use-motion .post-block,
+.use-motion .post-block {
+  opacity: 0;
+  margin-top: 60px;
+  margin-bottom: 60px;
+  padding: 25px;
+  -webkit-box-shadow: 0 0 5px rgba(202,203,203,0.5);
+  -moz-box-shadow: 0 0 5px rgba(202,203,204,0.5);
+}
 .use-motion .pagination,
 .use-motion .comments {
   opacity: 0;
@@ -2665,6 +2638,7 @@ hr {
   color: #eee;
 }
 .links-of-blogroll-item {
+  display: inline-block;
   padding: 2px 10px;
 }
 .links-of-blogroll-item a,
