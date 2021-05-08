@@ -196,6 +196,116 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN,en,default">
+    <link itemprop="mainEntityOfPage" href="https://sleepker.github.io/posts/30604237.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Sleepker">
+      <meta itemprop="description" content="千里之行，始于足下">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sleepker's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/30604237.html" class="post-title-link" itemprop="url">【数据库】Redis基础</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-05-08 22:07:18 / 修改时间：22:20:00" itemprop="dateCreated datePublished" datetime="2021-05-08T22:07:18+08:00">2021-05-08</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/" itemprop="url" rel="index"><span itemprop="name">数据库</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/posts/30604237.html#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/posts/30604237.html" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="【数据库】Redis基础"><a href="#【数据库】Redis基础" class="headerlink" title="【数据库】Redis基础"></a>【数据库】Redis基础</h1><h2 id="1-Redis入门"><a href="#1-Redis入门" class="headerlink" title="1.Redis入门"></a>1.Redis入门</h2><hr>
+<h3 id="1-1-NoSQL"><a href="#1-1-NoSQL" class="headerlink" title="1.1.NoSQL"></a>1.1.NoSQL</h3><hr>
+<ul>
+<li><p>解决：海量用户，高并发</p>
+</li>
+<li><p>传统关系型数据库：</p>
+<ul>
+<li>性能瓶颈：磁盘IO性能低下</li>
+<li>扩展瓶颈：数据关系复杂，扩展性差，不便于大规模集群</li>
+</ul>
+</li>
+<li><p>解决方法NoSQL：</p>
+<ul>
+<li>降低磁盘IO次数——内存存储</li>
+<li>去除数据间关系，越简单越好——不存储关系，仅存储数据</li>
+</ul>
+</li>
+<li><p>NoSQL简介</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">NoSQL：即 <span class="keyword">Not</span>-<span class="keyword">Only</span> <span class="keyword">SQL</span>（ 泛指非关系型的数据库），作为关系型数据库的补充。</span><br><span class="line"></span><br><span class="line">作用：应对基于海量用户和海量数据前提下的数据处理问题。</span><br><span class="line"></span><br><span class="line">特征：</span><br><span class="line">	可扩容，可伸缩</span><br><span class="line">	大数据量下高性能</span><br><span class="line">	灵活的数据模型</span><br><span class="line">	高可用</span><br><span class="line"></span><br><span class="line">常见 Nosql 数据库：</span><br><span class="line">	Redis</span><br><span class="line">	memcache</span><br><span class="line">	HBase</span><br><span class="line">	MongoDB</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/posts/30604237.html#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN,en,default">
     <link itemprop="mainEntityOfPage" href="https://sleepker.github.io/posts/31294acc.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -596,20 +706,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">4</span>
+          <span class="site-state-item-count">5</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-count">2</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-count">4</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
