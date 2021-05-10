@@ -1,0 +1,896 @@
+<!DOCTYPE html>
+<html lang="zh-CN,en,default">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.png" color="#222">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta name="baidu-site-verification" content="code-e6O1oAw6RJ">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"sleepker.github.io","root":"/","scheme":"Mist","version":"7.8.0","exturl":true,"sidebar":{"position":"left","width":240,"display":"always","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="【JavaSE】环境搭建1.Java简史  Java上线时间：1995开发商：美国Oracle.Sun类型：面向对象编程语言主要创始人：詹姆斯·高斯林 （James Gosling）">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【JavaSE】环境搭建">
+<meta property="og:url" content="https://sleepker.github.io/posts/46734779.html">
+<meta property="og:site_name" content="Sleepker&#39;s Blog">
+<meta property="og:description" content="【JavaSE】环境搭建1.Java简史  Java上线时间：1995开发商：美国Oracle.Sun类型：面向对象编程语言主要创始人：詹姆斯·高斯林 （James Gosling）">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://gitee.com/sleepker/picture/raw/master/20210510014933.png">
+<meta property="og:image" content="https://gitee.com/sleepker/picture/raw/master/20210510020116.png">
+<meta property="article:published_time" content="2021-05-09T22:26:05.614Z">
+<meta property="article:modified_time" content="2021-05-10T00:46:09.249Z">
+<meta property="article:author" content="Sleepker">
+<meta property="article:tag" content="JavaSE">
+<meta property="article:tag" content="JavaWeb">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://gitee.com/sleepker/picture/raw/master/20210510014933.png">
+
+<link rel="canonical" href="https://sleepker.github.io/posts/46734779.html">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>【JavaSE】环境搭建 | Sleepker's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Sleepker's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://sleepker.github.io/posts/46734779.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Sleepker">
+      <meta itemprop="description" content="千里之行，始于足下">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sleepker's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          【JavaSE】环境搭建
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-05-10 06:26:05 / 修改时间：08:46:09" itemprop="dateCreated datePublished" datetime="2021-05-10T06:26:05+08:00">2021-05-10</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaSE/" itemprop="url" rel="index"><span itemprop="name">JavaSE</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/posts/46734779.html#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/posts/46734779.html" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="【JavaSE】环境搭建"><a href="#【JavaSE】环境搭建" class="headerlink" title="【JavaSE】环境搭建"></a>【JavaSE】环境搭建</h1><h2 id="1-Java简史"><a href="#1-Java简史" class="headerlink" title="1.Java简史"></a>1.Java简史</h2><hr>
+<blockquote>
+<p><strong>Java</strong><br>上线时间：1995<br>开发商：美国Oracle.Sun<br>类型：面向对象编程语言<br>主要创始人：<strong>詹姆斯·高斯林</strong> （James Gosling）</p>
+</blockquote>
+<a id="more"></a>
+
+<ul>
+<li>起源：吸收了C++语言的各种优点，还摒弃了C++里难以理解的多继承、指针等概念</li>
+<li>特点：简单性、面向对象、分布式、编译和解释性、健壮性、安全性、平台独立与可移植性、高性能、多线程、动态性</li>
+<li>应用：桌面应用程序、Web应用程序、分布式系统、嵌入式系统应用程序</li>
+</ul>
+<p><strong>TimeLine:</strong></p>
+<hr>
+<ul>
+<li><strong>1991年</strong>，Sun公司为了抢占单片式计算机系统市场先机，成立了一个称为Green的项目小组，帕特里克、詹姆斯·高斯林、麦克·舍林丹和其他几个工程师一起组成的工作小组在加利福尼亚州门洛帕克市沙丘路的一个小工作室里面研究开发新技术，专攻计算机在家电产品上的嵌入式应用。<ul>
+<li>为了解决C++在单片机系统上太过复杂和难以移植的问题，他们首先着眼于语言的开发</li>
+<li>Sun公司研发人员并没有开发一种全新的语言，而是根据嵌入式软件的要求，对C++进行了改造，去除了留在C++的一些不太实用及影响安全的成分，并结合嵌入式系统的实时性要求，开发了一种称为Oak的面向对象语言。</li>
+<li>由于在开发Oak语言时，尚且不存在运行字节码的硬件平台，所以为了在开发时可以对这种语言进行实验研究，他们就在已有的硬件和软件平台基础上，按照自己所指定的规范，用软件建设了一个运行平台，整个系统除了比C++更加简单之外，没有什么大的区别。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li><strong>1992年的夏天</strong>，当Oak语言开发成功后，研究者们向硬件生产商进行演示了Green操作系统、Oak的程序设计语言、类库和其硬件，以说服他们使用Oak语言生产硬件芯片，但是，硬件生产商并未对此产生极大的热情。因为他们认为，在所有人对Oak语言还一无所知的情况下，就生产硬件产品的风险实在太大了，所以Oak语言也就因为缺乏硬件的支持而无法进入市场，从而被搁置了下来。</li>
+</ul>
+<hr>
+<ul>
+<li><strong>1994年6、7月间</strong>，在经历了一场历时三天的讨论之后，团队决定再一次改变了努力的目标，这次他们决定将该技术应用于万维网。<ul>
+<li>他们认为随着Mosaic浏览器的到来，因特网正在向同样的高度互动的远景演变，而这一远景正是他们在有线电视网中看到的。</li>
+<li>作为原型，帕特里克·诺顿写了一个小型万维网浏览器WebRunner。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li><strong>1995年</strong>，互联网的蓬勃发展给了Oak机会。业界为了使死板、单调的静态网页能够“灵活”起来，急需一种软件技术来开发一种程序，这种程序可以通过网络传播并且能够跨平台运行。<ul>
+<li>这个时候，Sun公司想起了那个被搁置起来很久的Oak，并且重新审视了那个用软件编写的试验平台，由于它是按照嵌入式系统硬件平台体系结构进行编写的，所以非常小，特别适用于网络上的传输系统，而Oak也是一种精简的语言，程序非常小，适合在网络上传输。</li>
+<li>Sun公司首先推出了可以嵌入网页并且可以随同网页在网络上传输的Applet（Applet是一种将小程序嵌入到网页中进行执行的技术）<em>，并将Oak更名为Java</em>（在申请注册商标时，发现Oak已经被人使用了，再想了一系列名字之后，最终，使用了提议者在喝一杯Java咖啡时无意提到的Java词语）。</li>
+<li><strong>5月23日</strong>，Sun公司在Sun world会议上正式发布Java和HotJava浏览器。</li>
+<li>IBM、Apple、DEC、Adobe、HP、Oracle、Netscape、微软等各大公司都纷纷停止了自己的相关开发项目，竞相购买了Java使用许可证，并为自己的产品开发了相应的Java平台</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li><strong>1996年1月</strong>，Sun公司发布了Java的第一个开发工具包<em>（JDK 1.0）</em>，这是Java发展历程中的重要里程碑，标志着Java成为一种独立的开发工具。<ul>
+<li><strong>9月</strong>，约8.3万个网页应用了Java技术来制作。</li>
+<li><strong>10月</strong>，Sun公司发布了Java平台的第一个即时<em>（JIT）</em>编译器。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li><strong>1997年2月</strong>，JDK 1.1面世，在随后的3周时间里，达到了22万次的下载量。<ul>
+<li><strong>4月2日</strong>，Java One会议召开，参会者逾一万人，创当时全球同类会议规模之纪录。</li>
+<li><strong>9月</strong>，Java Developer Connection社区成员超过10万。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li><strong>1998年12月8日</strong>，第二代Java平台的企业版J2EE发布。</li>
+</ul>
+<hr>
+<ul>
+<li><strong>1999年6月</strong>，Sun公司发布了第二代Java平台（简称为Java2）的3个版本：<ul>
+<li>J2ME（Java2 Micro Edition，Java2平台的微型版），应用于移动、无线及有限资源的环境；</li>
+<li>J2SE（Java 2 Standard Edition，Java 2平台的标准版），应用于桌面环境；</li>
+<li>J2EE（Java 2Enterprise Edition，Java 2平台的企业版），应用于基于Java的应用服务器。</li>
+<li>Java 2平台的发布，是Java发展过程中最重要的一个里程碑，标志着Java的应用开始普及。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li><strong>1999年4月27日</strong>，HotSpot虚拟机发布。<ul>
+<li>HotSpot虚拟机发布时是作为JDK 1.2的附加程序提供的，后来它成为了JDK 1.3及之后所有版本的Sun JDK的默认虚拟机</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li><strong>2000年5月</strong>，JDK1.3、JDK1.4和J2SE1.3相继发布，几周后其获得了Apple公司Mac OS X的工业标准的支持。</li>
+</ul>
+<hr>
+<ul>
+<li><strong>2001年9月24日</strong>，J2EE1.3发布。</li>
+</ul>
+<hr>
+<ul>
+<li><strong>2002年2月26日</strong>，J2SE1.4发布。<ul>
+<li>自此Java的计算能力有了大幅提升，与J2SE1.3相比，其多了近62%的类和接口。</li>
+<li>在这些新特性当中，还提供了广泛的XML支持、安全套接字<em>（Socket）</em>支持<em>（通过SSL与TLS协议）</em>、全新的I/OAPI、正则表达式、日志与断言。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li><strong>2004年9月30日</strong>，J2SE1.5发布，成为Java语言发展史上的又一里程碑。<ul>
+<li>为了表示该版本的重要性，J2SE 1.5更名为Java SE 5.0<em>（内部版本号1.5.0）</em>，代号为“Tiger”，</li>
+<li>Tiger包含了从1996年发布1.0版本以来的最重大的更新，其中包括泛型支持、基本类型的自动装箱、改进的循环、枚举类型、格式化I/O及可变参数。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li><strong>2005年6月</strong>，在Java One大会上，Sun公司发布了Java SE 6。<ul>
+<li>此时，Java的各种版本已经更名，已取消其中的数字2，如J2EE更名为JavaEE，J2SE更名为JavaSE，J2ME更名为JavaME。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li><strong>2006年11月13日</strong>，Java技术的发明者Sun公司宣布，将Java技术作为免费软件对外发布。<ul>
+<li>Sun公司正式发布的有关Java平台标准版的第一批源代码，以及Java迷你版的可执行源代码。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li><strong>2007年3月起</strong>，全世界所有的开发人员均可对Java源代码进行修改</li>
+</ul>
+<hr>
+<ul>
+<li><strong>2009年</strong>，甲骨文公司宣布收购Sun。</li>
+<li><strong>2010年</strong>，Java编程语言的共同创始人之一詹姆斯·高斯林从Oracle公司辞职。</li>
+<li><strong>2011年</strong>，甲骨文公司举行了全球性的活动，以庆祝Java7的推出，随后Java7正式发布。</li>
+<li><strong>2014年</strong>，甲骨文公司发布了Java8正式版 。</li>
+</ul>
+<h2 id="2-Java特性和优势"><a href="#2-Java特性和优势" class="headerlink" title="2.Java特性和优势"></a>2.Java特性和优势</h2><hr>
+<ul>
+<li><strong>简单性</strong>：java是C++语法纯净版，没有头文件、指针运算，不用分配内存，语法基于C</li>
+</ul>
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Java看起来设计得很像C++，但是为了使语言小和容易熟悉，设计者们把C++语言中许多可用的特征去掉了，这些特征是一般程序员很少使用的。</span></span><br><span class="line"><span class="keyword">	</span>例如，<span class="keyword">Java不支持go </span>to语句，代之以提供<span class="keyword">break和continue语句以及异常处理。</span></span><br><span class="line"><span class="keyword">Java还剔除了C++的操作符过载（overload）和多继承特征，并且不使用主文件，免去了预处理程序。</span></span><br><span class="line"><span class="keyword">因为Java没有结构，数组和串都是对象，所以不需要指针。</span></span><br><span class="line"><span class="keyword">Java能够自动处理对象的引用和间接引用，实现自动的无用单元收集，使用户不必为存储管理问题烦恼，能更多的时间和精力花在研发上。</span></span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li><strong>面向对象</strong>：面向对象编程思想，注重在对象与对象之间的接口上，万物皆对象</li>
+</ul>
+<figure class="highlight oxygene"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">Java是一个面向对象的语言。</span><br><span class="line">对程序员来说，这意味着要注意应中的数据和操纵数据的方法（<span class="function"><span class="keyword">method</span>），而不是严格地用过程来思考。</span></span><br><span class="line"><span class="function">在一个面向对象的系统中，类（<span class="title">class</span>）是数据和操作数据的方法的集合。</span></span><br><span class="line"><span class="function">数据和方法一起描述对象（<span class="title">object</span>）的状态和行为。</span></span><br><span class="line"><span class="function">每一对象是其状态和行为的封装。</span></span><br><span class="line"><span class="function">类是按一定体系和层次安排的，使得子类可以从超类继承行为。</span></span><br><span class="line"><span class="function">在这个类层次体系中有一个根类，它是具有一般行为的类。</span></span><br><span class="line"><span class="function"><span class="title">Java</span>程序是用类来组织的。</span></span><br><span class="line"><span class="function"><span class="title">Java</span>还包括一个类的扩展集合，分别组成各种程序包（<span class="title">Package</span>），用户可以在自己的程序中使用。</span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">例如：</span></span><br><span class="line"><span class="function">	<span class="title">Java</span>提供产生图形用户接口部件的类（<span class="title">java</span>.<span class="title">awt</span>包），这里<span class="title">awt</span>是抽象窗口工具集（<span class="title">abstract</span> <span class="title">windowing</span> <span class="title">toolkit</span>）的缩写，</span></span><br><span class="line"><span class="function">	处理输入输出的类（<span class="title">java</span>.<span class="title">io</span>包）</span></span><br><span class="line"><span class="function">	支持网络功能的类（<span class="title">java</span>.<span class="title">net</span>包）。</span></span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li><strong>可移植性</strong>：一次编写，到处运行 Wright once，run anywhere</li>
+</ul>
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Java使得语言声明不依赖于实现的方面。</span></span><br><span class="line"><span class="keyword">	</span>例如，<span class="keyword">Java显式说明每个基本数据类型的大小和它的运算行为（这些数据类型由Java语法描述）。</span></span><br><span class="line"><span class="keyword">Java环境本身对新的硬件平台和操作系统是可移植的。</span></span><br><span class="line"><span class="keyword">Java编译程序也用Java编写，而Java运行系统用ANSIC语言编写。</span></span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li><strong>高性能</strong>：Java及时编译程序，使某些代码的效率接近C++的效率</li>
+</ul>
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Java是一种先编译后解释的语言，所以它不如全编译性语言快。</span></span><br><span class="line"><span class="keyword">但是有些情况下性能是很要紧的，为了支持这些情况，Java设计者制作了“及时”编译程序，它能在运行时把Java字节码翻译成特定CPU（中央处理器）的机器代码，也就是实现全编译了。</span></span><br><span class="line"><span class="keyword">Java字节码格式设计时考虑到这些“及时”编译程序的需要，所以生成机器代码的过程相当简单，它能产生相当好的代码。</span></span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li><strong>分布式</strong>：为网络分布式环境所设计，能处理很多TCP/IP协议上的东西</li>
+</ul>
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Java设计成支持在网络上应用，它是分布式语言。</span></span><br><span class="line"><span class="keyword">Java既支持各种层次的网络连接，又以Socket类支持可靠的流（stream）网络连接，所以用户可以产生分布式的客户机和服务器。</span></span><br><span class="line"><span class="keyword">网络变成软件应用的分布运载工具。</span></span><br><span class="line"><span class="keyword">Java程序只要编写一次，就可到处运行。</span></span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li><strong>动态性</strong>：Java本身不具备动态性，但通过反射机制使Java拥有一些动态性</li>
+</ul>
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Java本质为静态语言，而不是动态语言。</span></span><br><span class="line"><span class="keyword">动态语言显著的特点是在程序运行时，可以改变程序结构或变量类型，典型的动态语言有Python、ruby、javascript等。</span></span><br><span class="line"><span class="keyword">Java不是动态语言，但Java具有一定的动态性，表现在以下几个方面:</span></span><br><span class="line"><span class="keyword">	</span>反射机制；</span><br><span class="line">	动态字节码操作；</span><br><span class="line">	动态编译；</span><br><span class="line">	执行其他脚本代码；</span><br><span class="line">	</span><br><span class="line">反射和动态代理</span><br><span class="line"></span><br><span class="line"><span class="keyword">Java语言设计成适应于变化的环境，它是一个动态的语言。</span></span><br><span class="line"><span class="keyword">例如，Java中的类是根据需要载入的，甚至有些是通过网络获取的。</span></span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li><strong>多线程</strong>：Java支持多线程</li>
+</ul>
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Java是多线程语言，它提供支持多线程的执行（也称为轻便过程），能处理不同任务，使具有线索的程序设计很容易。</span></span><br><span class="line"><span class="keyword">Java的lang包提供一个Thread类，它支持开始线索、运行线索、停止线索和检查线索状态的方法。</span></span><br><span class="line"><span class="keyword"></span></span><br><span class="line"><span class="keyword">Java的线索支持也包括一组同步原语。</span></span><br><span class="line"><span class="keyword">这些原语是基于监督程序和条件变量风范，由C.A.R.Haore开发的广泛使用的同步化方案。</span></span><br><span class="line"><span class="keyword"></span></span><br><span class="line"><span class="keyword">用关键词synchronized，程序员可以说明某些方法在一个类中不能并发地运行。</span></span><br><span class="line"><span class="keyword">这些方法在监督程序控制之下，确保变量维持在一个一致的状态。</span></span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li><strong>安全性</strong>：去除指针和内存管理，拥有异常机制，更安全</li>
+</ul>
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Java的存储分配模型是它防御恶意代码的主要方法之一。</span></span><br><span class="line"><span class="keyword">Java没有指针，所以程序员不能得到隐蔽起来的内幕和伪造指针去指向存储器。</span></span><br><span class="line"><span class="keyword"></span></span><br><span class="line"><span class="keyword">更重要的是，Java编译程序不处理存储安排决策，所以程序员不能通过查看声明去猜测类的实际存储安排。</span></span><br><span class="line"><span class="keyword">编译的Java代码中的存储引用在运行时由Java解释程序决定实际存储地址。</span></span><br><span class="line"><span class="keyword">Java运行系统使用字节码验证过程来保证装载到网络上的代码不违背任何Java语言限制。</span></span><br><span class="line"><span class="keyword">这个安全机制部分包括类如何从网上装载。</span></span><br><span class="line"><span class="keyword">	</span>例如，装载的类是放在分开的名字空间而不是局部类，预防恶意的小应用程序用它自己的版本来代替标准<span class="keyword">Java类。</span></span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li><strong>健壮性</strong>：强类型语言，Java存储模型，异常处理机制</li>
+</ul>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">ava原来是用作编写消费类家用电子产品软件的语言，所以它是被设计成写高可靠和稳健软件的。</span><br><span class="line">Java消除了某些编程错误，使得用它写可靠软件相当容易。</span><br><span class="line"></span><br><span class="line">Java是一个强类型语言，它允许扩展编译时检查潜在类型不匹配问题的功能。</span><br><span class="line">Java要求显式的方法声明，它不支持C风格的隐式声明。</span><br><span class="line">这些严格的要求保证编译程序能捕捉调用错误，这就导致更可靠的程序。</span><br><span class="line"></span><br><span class="line">可靠性方面最重要的增强之一是Java的存储模型。</span><br><span class="line">Java不支持指针，它消除重写存储和讹误数据的可能性。</span><br><span class="line">类似地，Java自动的“无用单元收集”预防存储漏泄和其它有关动态存储分配和解除分配的有害错误。</span><br><span class="line">Java解释程序也执行许多运行时的检查，诸如验证所有数组和串访问是否在界限之内。</span><br><span class="line"></span><br><span class="line">异常处理是Java中使得程序更稳健的另一个特征。</span><br><span class="line">异常是某种类似于错误的异常条件出现的信号。</span><br><span class="line">使用<span class="keyword">try</span><span class="regexp">/catch/</span><span class="keyword">finally</span>语句，程序员可以找到出错的处理代码，这就简化了出错处理和恢复的任务。</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="3-Java编程环境"><a href="#3-Java编程环境" class="headerlink" title="3.Java编程环境"></a>3.Java编程环境</h2><hr>
+<h3 id="Java三大版本："><a href="#Java三大版本：" class="headerlink" title="==Java三大版本：=="></a>==Java三大版本：==</h3><hr>
+<ul>
+<li><strong>JavaSE：Standard Editor（标准版）</strong></li>
+</ul>
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">J2SE </span>包含构成 <span class="keyword">Java </span>语言核心的类，定位在个人计算机上的应用。</span><br><span class="line"></span><br><span class="line">这个版本是<span class="keyword">Java平台的核心，它提供了非常丰富的API来开发一般个人计算机上的应用程序，</span></span><br><span class="line"><span class="keyword">包括用户界面接口AWT及Swing，网络功能与国际化、图像处理能力以及输入输出支持等。</span></span><br><span class="line"><span class="keyword">在上世纪90年代末互联网上大放异彩的Applet也属于这个版本。</span></span><br><span class="line"><span class="keyword">Applet后来为Flash取代，Flash即将被HTML5取代。</span></span><br><span class="line"><span class="keyword"></span></span><br><span class="line"><span class="keyword">比如：数据库连接、接口定义、输入输出、网络编程等。</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>JavaEE：Enterprise Editor（企业版）</strong></li>
+</ul>
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">JavaEE </span>中包含 <span class="keyword">JavaSE </span>中的类，并且还包含用于开发企业级应用的类。</span><br><span class="line"></span><br><span class="line"><span class="keyword">JavaEE是JavaSE的扩展，增加了用于服务器开发的类库。</span></span><br><span class="line"><span class="keyword">	</span><span class="keyword">JDBC是让程序员能直接在Java内使用的SQL的语法来访问数据库内的数据；</span></span><br><span class="line"><span class="keyword">	</span>Servlet能够延伸服务器的功能，通过请求-响应的模式来处理客户端的请求；</span><br><span class="line">	<span class="keyword">JSP是一种可以将Java程序代码内嵌在网页内的技术。</span></span><br><span class="line"><span class="keyword"></span></span><br><span class="line"><span class="keyword">比如 </span>Servlet、<span class="keyword">JSP、XML、事务控制等。</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>JavaME：Micro Editor（微缩版）</strong></li>
+</ul>
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">J2ME </span>包含 <span class="keyword">J2SE </span>中一部分类，用于消费电子产品的软件开发。</span><br><span class="line"></span><br><span class="line"><span class="keyword">JavaME是JavaSE的内伸，包含J2SE的一部分核心类，也有自己的扩展类,增加了适合微小装置的类库：javax.microedition.io.*等。</span></span><br><span class="line"><span class="keyword">该版本针对资源有限的电子消费产品的需求精简核心类库，并提供了模块化的架构让不同类型产品能够随时增加支持的能力。</span></span><br><span class="line"><span class="keyword"></span></span><br><span class="line"><span class="keyword">比如：传呼机、智能卡、手机、PDA、机顶盒等。</span></span><br></pre></td></tr></table></figure>
+
+<p>**==范围==**：J2SE 包含于 J2EE 中，J2ME 包含了 J2SE 的核心类，但新添加了一些专有类。</p>
+<p><img src="https://gitee.com/sleepker/picture/raw/master/20210510014933.png" alt="image-20210510014918072"></p>
+<h3 id="JDK、JRE、JVM"><a href="#JDK、JRE、JVM" class="headerlink" title="==JDK、JRE、JVM=="></a>==<strong>JDK、JRE、JVM</strong>==</h3><hr>
+<ul>
+<li>JDK:（Java Development Kit）Java 开发工具包</li>
+</ul>
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">jdk </span>是整个 <span class="keyword">Java </span>开发的核心，它集成了 <span class="keyword">jre </span>和一些好用的小工具。</span><br><span class="line">例如：<span class="keyword">javac.exe，java.exe，jar.exe </span>等。</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>KRE:（Java Runtime Environment）Java 运行时环境</li>
+</ul>
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">它主要包含两个部分，<span class="keyword">jvm </span>的标准实现和 <span class="keyword">Java </span>的一些基本类库。</span><br><span class="line">它相对于 <span class="keyword">jvm </span>来说，多出来的是一部分的 <span class="keyword">Java </span>类库。</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>JVM:（Java Virtual Machine）Java 虚拟机</li>
+</ul>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">它只认识 xxx.class 这种类型的文件，它能够将 <span class="keyword">class</span> 文件中的字节码指令进行识别并调用操作系统向上的 <span class="symbol">API</span> 完成动作。</span><br><span class="line">所以说，<span class="symbol">jvm</span> 是 <span class="symbol">Java</span> 能够跨平台的核心</span><br></pre></td></tr></table></figure>
+
+<p>关系：</p>
+<ul>
+<li>JDK&gt;JRE&gt;JVM</li>
+<li>JRE = JVM + libraries to run Java Application </li>
+<li>JDK = JRE + tools to develop Java Application</li>
+</ul>
+<p><img src="https://gitee.com/sleepker/picture/raw/master/20210510020116.png" alt="image-20210510020114986"></p>
+<h3 id="编译型和解释型"><a href="#编译型和解释型" class="headerlink" title="==编译型和解释型=="></a><strong>==编译型和解释型==</strong></h3><hr>
+<ul>
+<li>编译：（操作系统、大型应用程序、数据库系统）C、C++、Delphi、Pascal、Fortran </li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">在程序运行前编译全部代码</span><br><span class="line">编译是将源程序翻译成可执行的目标代码，执行可执行程序文件，翻译与执行是分开的。</span><br><span class="line"></span><br><span class="line">优点：可以跨平台，一次编译多次执行，执行速度快</span><br><span class="line">缺点：代码版本更改就要重新编译</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>解释：（网页脚本、服务器脚本及辅助开发接口）Java、Basic、javascript、python</li>
+</ul>
+<figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">在程序运行时逐句解释运行</span><br><span class="line">解释程序不产生目标代码，它逐条地取出源程序中的语句，边解释，边执行；</span><br><span class="line">解释器把源代码文件边解释成机器语言边交给<span class="meta">CPU</span>执行。</span><br><span class="line"></span><br><span class="line">优点：开发边界，版本更改不受影响</span><br><span class="line">缺点：运行速度慢</span><br></pre></td></tr></table></figure>
+
+<p>关于Java：Java和其他的语言不太一样。因为java针对不同的平台有不同的JVM，实现了跨平台。所以Java语言有一次编译到处运行的说法。</p>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1.</span>你可以说它是编译型的：因为所有的Java代码都是要编译的，.java不经过编译就什么用都没有。 </span><br><span class="line"></span><br><span class="line"><span class="number">2.</span>你可以说它是解释型的：因为java代码编译后不能直接运行，它是解释运行在JVM上的，所以它是解释运行的，那也就算是解释的了。 </span><br><span class="line"></span><br><span class="line"><span class="number">3.</span>但是，现在的JVM为了效率，都有一些JIT优化。它又会把.class的二进制代码编译为本地的代码直接运行，所以，又是编译的。</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">java是解释型的语言，因为虽然java也需要编译，编译成.class文件，但是并不是机器可以识别的语言，而是字节码，</span></span><br><span class="line"><span class="keyword">最终还是需要 </span><span class="keyword">jvm的解释，才能在各个平台执行，这同时也是java跨平台的原因。</span></span><br><span class="line"><span class="keyword"></span></span><br><span class="line"><span class="keyword">所以可是说java即是编译型的，也是解释型，但是假如非要归类的话，从概念上的定义，恐怕java应该归到解释型的语言中。 </span></span><br></pre></td></tr></table></figure>
+
+
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatpay.png" alt="Sleepker 微信支付">
+        <p>微信支付</p>
+      </div>
+
+  </div>
+</div>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Sleepker
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://sleepker.github.io/posts/46734779.html" title="【JavaSE】环境搭建">https://sleepker.github.io/posts/46734779.html</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/JavaSE/" rel="tag"><i class="fa fa-tag"></i> JavaSE</a>
+              <a href="/tags/JavaWeb/" rel="tag"><i class="fa fa-tag"></i> JavaWeb</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/posts/23f808de.html" rel="prev" title="【JavaSE】预备知识">
+      <i class="fa fa-chevron-left"></i> 【JavaSE】预备知识
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E3%80%90JavaSE%E3%80%91%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA"><span class="nav-number">1.</span> <span class="nav-text">【JavaSE】环境搭建</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-Java%E7%AE%80%E5%8F%B2"><span class="nav-number">1.1.</span> <span class="nav-text">1.Java简史</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-Java%E7%89%B9%E6%80%A7%E5%92%8C%E4%BC%98%E5%8A%BF"><span class="nav-number">1.2.</span> <span class="nav-text">2.Java特性和优势</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-Java%E7%BC%96%E7%A8%8B%E7%8E%AF%E5%A2%83"><span class="nav-number">1.3.</span> <span class="nav-text">3.Java编程环境</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Java%E4%B8%89%E5%A4%A7%E7%89%88%E6%9C%AC%EF%BC%9A"><span class="nav-number">1.3.1.</span> <span class="nav-text">&#x3D;&#x3D;Java三大版本：&#x3D;&#x3D;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JDK%E3%80%81JRE%E3%80%81JVM"><span class="nav-number">1.3.2.</span> <span class="nav-text">&#x3D;&#x3D;JDK、JRE、JVM&#x3D;&#x3D;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BC%96%E8%AF%91%E5%9E%8B%E5%92%8C%E8%A7%A3%E9%87%8A%E5%9E%8B"><span class="nav-number">1.3.3.</span> <span class="nav-text">&#x3D;&#x3D;编译型和解释型&#x3D;&#x3D;</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Sleepker"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">Sleepker</p>
+  <div class="site-description" itemprop="description">千里之行，始于足下</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">8</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3NsZWVwa2Vy" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;sleepker"><i class="fab fa-github fa-fw"></i>GitHub</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="bWFpbHRvOjE4MTMyNDk2MTBAcXEuY29t" title="E-Mail → mailto:1813249610@qq.com"><i class="fa fa-envelope fa-fw"></i>E-Mail</span>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Sleepker</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+<script src="/js/bookmark.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+  <script defer src="/lib/three/three.min.js"></script>
+    <script defer src="/lib/three/three-waves.min.js"></script>
+
+
+  
+  <script data-pjax>
+    (function(){
+      var canonicalURL, curProtocol;
+      //Get the <link> tag
+      var x=document.getElementsByTagName("link");
+		//Find the last canonical URL
+		if(x.length > 0){
+			for (i=0;i<x.length;i++){
+				if(x[i].rel.toLowerCase() == 'canonical' && x[i].href){
+					canonicalURL=x[i].href;
+				}
+			}
+		}
+    //Get protocol
+	    if (!canonicalURL){
+	    	curProtocol = window.location.protocol.split(':')[0];
+	    }
+	    else{
+	    	curProtocol = canonicalURL.split(':')[0];
+	    }
+      //Get current URL if the canonical URL does not exist
+	    if (!canonicalURL) canonicalURL = window.location.href;
+	    //Assign script content. Replace current URL with the canonical URL
+      !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=canonicalURL,t=document.referrer;if(!e.test(r)){var n=(String(curProtocol).toLowerCase() === 'https')?"https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif":"//api.share.baidu.com/s.gif";t?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var i=new Image;i.src=n}}(window);})();
+  </script>
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+  <script src="//cdn.jsdelivr.net/npm/quicklink@1/dist/quicklink.umd.js"></script>
+  <script>
+      window.addEventListener('load', () => {
+      quicklink({
+        timeout : 3000,
+        priority: true,
+        ignores : [uri => uri.includes('#'),uri => uri === 'https://sleepker.github.io/posts/46734779.html',]
+      });
+      });
+  </script>
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : 'sfQJrVuadvBKXUE6zvm2EYQj-gzGzoHsz',
+      appKey     : '66pbl6TuNnuWpbnrdJ64sj5D',
+      placeholder: "Just go go",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+    </div>
+</body>
+</html>
